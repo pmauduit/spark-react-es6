@@ -1,8 +1,0 @@
-image: maven/maven:3.3.3-jdk-8-onbuild
-name: maps
-script:
-  - mvn clean install
-notify:
-  email:
-    recipients:
-      - pgrimard@gmail.com
