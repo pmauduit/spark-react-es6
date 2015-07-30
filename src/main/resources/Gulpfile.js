@@ -13,8 +13,9 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var resolve = require('resolve');
 var series = require('stream-series');
+var argv = require('yargs').argv;
 
-var production = (process.env.NODE_ENV === 'production');
+var production = (process.env.NODE_ENV === 'production' || argv.production);
 
 gulp.task('default', ['clean', 'inject'], function() {});
 

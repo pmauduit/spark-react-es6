@@ -5,7 +5,7 @@
   "author": "Patrick Grimard <pgrimard@gmail.com>",
   "devDependencies": {
     "babelify": "^6.1.2",
-    "browserify": "^10.2.4",
+    "browserify": "^11.0.1",
     "del": "^1.2.0",
     "gulp": "^3.9.0",
     "gulp-if": "^1.2.5",
@@ -17,7 +17,8 @@
     "resolve": "^1.1.6",
     "stream-series": "^0.1.1",
     "vinyl-buffer": "^1.0.0",
-    "vinyl-source-stream": "^1.1.0"
+    "vinyl-source-stream": "^1.1.0",
+    "yargs": "^3.15.0"
   },
   "dependencies": {
     "react": "^0.13.3"
