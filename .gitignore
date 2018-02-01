@@ -6,3 +6,4 @@ target
 *.iml
 node
 node.tar.gz
+src/main/resources/package-lock.json

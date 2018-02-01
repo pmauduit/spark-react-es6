@@ -6,8 +6,8 @@ import java.util.Map;
 import static com.patrickgrimard.JsonTransformer.toJson;
 import static spark.Spark.before;
 import static spark.Spark.get;
-import static spark.SparkBase.port;
-import static spark.SparkBase.staticFileLocation;
+import static spark.Spark.staticFileLocation;
+import static spark.Spark.port;
 
 /**
  * Created by Patrick on 2015-06-23.
