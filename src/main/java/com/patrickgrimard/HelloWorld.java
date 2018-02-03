@@ -65,7 +65,7 @@ public class HelloWorld {
         before((req, res) -> res.type("application/json"));
         Map<String, List> pizzaJsonObj = new HashMap<String, List>();
         pizzaJsonObj.put("pizzas", pizzas);
-        get("/pizzas", (req, res) -> toJson(pizzaJsonObj));
+        get("/api/pizzas", (req, res) -> toJson(pizzaJsonObj));
     }
   public static class Pizza {
 	  
