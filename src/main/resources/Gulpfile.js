@@ -20,19 +20,21 @@ var production = (process.env.NODE_ENV === 'production' || argv.production);
 gulp.task('default', ['clean', 'inject'], function() {});
 
 gulp.task('clean', function(cb) {
-  return del(['./public'], cb);
+  var deleted = del(['./public'], cb);
+  return deleted;
 });
 
-gulp.task('inject', ['vendor', 'scripts'], function() {
+gulp.task('inject', ['vendor', 'scripts', 'bootstrap'], function() {
   var vendor = gulp.src('./public/scripts/vendor*.js', {read: false});
   var scripts = gulp.src('./public/scripts/scripts*.js', {read: false});
-
+  var bootstrap_min_js = gulp.src("./public/bootstrap/js/bootstrap.min.js", {read: false});
+  var bootstrap_min_css = gulp.src("./public/bootstrap/css/bootstrap.min.css", {read: false});
   gulp.src('./app/index.html')
-    .pipe(inject(series(vendor, scripts), {ignorePath: '/public'}))
+    .pipe(inject(series(vendor, scripts, bootstrap_min_js, bootstrap_min_css), {ignorePath: '/public'}))
     .pipe(gulp.dest('./public'));
 });
 
-gulp.task('vendor', function() {
+gulp.task('vendor', ['clean'], function() {
   var b = browserify({debug: !production});
 
   getNPMPackageIds().forEach(function(id) {
@@ -42,7 +44,7 @@ gulp.task('vendor', function() {
   return bundle('vendor.js', b);
 });
 
-gulp.task('scripts', function() {
+gulp.task('scripts', ['clean'], function() {
   var b = browserify({debug: !production})
     .require('./app/scripts/app.js', {entry: true})
     .transform(babelify);
@@ -53,6 +55,21 @@ gulp.task('scripts', function() {
 
   return bundle('scripts.js', b);
 });
+
+gulp.task('bootstrap', ['clean'], function () {
+    return gulp.src("./node_modules/bootstrap/dist/**/*")
+        .pipe(gulp.dest("./public/bootstrap"))
+	.on('end', function () {
+            del([
+                './public/bootstrap/css/*.*',
+                '!./public/bootstrap/css/bootstrap.min.css',
+                '!./public/bootstrap/css/bootstrap.css.map',
+                './public/bootstrap/js/bootstrap.js',
+                './public/bootstrap/js/npm.js',
+            ]);
+        });
+});
+
 
 function bundle(name, b) {
   return b.bundle().pipe(source(name))
