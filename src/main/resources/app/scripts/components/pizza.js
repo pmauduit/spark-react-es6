@@ -20,24 +20,26 @@ class PizzaComponent extends React.Component {
 
   render() {
     return (
-          <div>
-    		  <h1>Liste des pizzas</h1>
-    		    <div className="container-fluid">
-    		      <div className="card-deck">
-          {this.state.pizzas.map((p, i) =>
-             <div className="card" styles={{width : '20rem'}}>
-             
-                <div className="card-block">
-                  <h4 className="card-title">{p.Name}</h4>
-                  <p className="card-text">{p.Desc}</p>
-                  <a href='#' className="btn btn-primary">Commander</a>
-                </div>
+      <div>
+        <h1>Liste des pizzas</h1>
+          <div className="container-fluid">
+            <div className="card-columns col-md-8">
+            {this.state.pizzas.map((p, i) =>
+              <div className="card">
+                  <div className="card-block">
+                    <h4 className="card-title">{p.Name}</h4>
+                    <p className="card-text">{p.Desc}</p>
+                    <p className="card-text text-right">{p.price} Eur</p>
+                  </div>
+                  <div className="card-footer text-center">
+                    <a href='#' className="btn btn-primary">Commander</a>
+                  </div>
               </div>
-          )
-          }
-                </div>
-              </div>
+            )
+            }
+            </div>
           </div>
+        </div>
     );
   }
 }
