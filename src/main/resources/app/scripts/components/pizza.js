@@ -17,7 +17,13 @@ class PizzaComponent extends React.Component {
         this.setState(res.data);
       });
   }
-
+  order(e) {
+	    var currentUser = document.getElementById('userInput').value; 
+	    var city = axios.post('/api/order', { pizzaId: e, userName: currentUser }).then(res => {
+	    	console.log(res);
+	    });
+  }
+  
   render() {
     return (
       <div>
@@ -32,7 +38,7 @@ class PizzaComponent extends React.Component {
                     <p className="card-text text-right">{p.price} Eur</p>
                   </div>
                   <div className="card-footer text-center">
-                    <a href='#' className="btn btn-primary">Commander</a>
+                    <a onClick={() => this.order(p.pizzaId)} className="btn btn-primary">Commander</a>
                   </div>
               </div>
             )
